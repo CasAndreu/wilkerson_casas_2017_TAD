@@ -91,18 +91,19 @@ robust_model.get_all_ftp(features_top_n = 50)
 # Clustering the topics based on the cosine similarities by using Spectral
 #   clustering.
 # Trying several n-clusterings
-
-clusters_list = []
-clusters_fcps_list = []
-
 clusters_n = range(5,10,1) #list of number of clusters to try out
-for n in clusters_n:
-    clusters = robust_model.cluster_topics(clusters_n = n)
-    # features_top_n = top most predictive features for each cluster that we
-    #   want to keep
-    fcps = robust_model.get_fcp(clusters, features_top_n = 15)
-    clusters_list.append(clusters)
-    clusters_fcps_list.append(fcps)
 
+for n in clusters_n:
+    clusters = robust_model.cluster_topics(clusters_n = n,)
+    fcps = robust_model.get_fcp(clusters, features_top_n = 15)
+    with open(path + "data/clusters/cluster_c" + str(n) + ".csv", "w") as f:
+        writer = csv.writer(f, quoting = csv.QUOTE_ALL)
+        writer.writerow(clusters)
+    with open(path + "data/clusters_top_keywords/cluster_c" + str(n) + 
+    ".csv", "w") as f:
+        writer = csv.writer(f, quoting = csv.QUOTE_ALL)
+        writer.writerow(fcps)
+    
+    
 
     
