@@ -16,6 +16,10 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
   The script uses a `python` module initially written for this paper: [rlda](https://github.com/CasAndreu/rlda) (Robust Latent Dirichlet Allocation)
 
 **B**. `02_figure_2.R`: Replication of Figure 2 of the paper.
+<p align="center">
+  <img src="images/intra_density_final.png" style="width: 700px;"/>
+</p>
+
 
 **C**. `03_figure_3.R`: Replication of Figure 3 of the paper.
 
