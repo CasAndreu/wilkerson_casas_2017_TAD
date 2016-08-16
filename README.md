@@ -17,17 +17,29 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
 
 **B**. `02_figure_2.R`: Replication of Figure 2 of the paper.
 <p align="center">
-  <img src="images/intra_density_final.png" style="width: 700px;"/>
+  <img src="images/intra_density_final.png" style="width: 200px;"/>
 </p>
 
 
 **C**. `03_figure_3.R`: Replication of Figure 3 of the paper.
+<p align="center">
+  <img src="images/three_clustering.png" style="width: 200px;"/>
+</p>
 
 **D**. `04_figure_4.R`: Replication of Figure 4 of the paper.
+<p align="center">
+  <img src="images/intra_including_excluding.png" style="width: 200px;"/>
+</p>
 
 **E**. `05_figure_5.R`: Replication of Figure 5 of the paper.
+<p align="center">
+  <img src="images/clusters_issues_topics2.png" style="width: 200px;"/>
+</p>
 
 **F**. `06_figure_7.R`: Replication of Figure 7 of the paper.
+<p align="center">
+  <img src="images/issues_results3.png" style="width: 200px;"/>
+</p>
 
 
 
