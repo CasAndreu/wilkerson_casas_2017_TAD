@@ -17,7 +17,7 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
 
 **B**. `02_figure_2.R`: Replication of Figure 2 of the paper.
 <p align="center">
-  <img src="images/intra_density_final.png" style="width: 700px;"/>
+  <img src="images/intra_density_final.png" style="width: 200px;"/>
 </p>
 
 
