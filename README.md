@@ -14,3 +14,16 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
   - Calculates the pairwise cosine similarity (n = 722,500) between all topics (n = 850) from the 17 models and saves the similarity scores in `csv` format: `cos_list.csv`
   - Uses [Spectral Clustering](http://scikit-learn.org/stable/modules/clustering.html#spectral-clustering) and the cosine similarity scores to cluster topics into `c` number of clusters (`c` = {5, 10, ..., 95}). Saves the resulting clusters in the `data/clusters` directory.
   The script uses a `python` module initially written for this paper: [rlda](https://github.com/CasAndreu/rlda) (Robust Latent Dirichlet Allocation)
+
+**B**. `02_figure_2.R`: Replication of Figure 2 of the paper.
+
+**C**. `03_figure_3.R`: Replication of Figure 3 of the paper.
+
+**D**. `04_figure_4.R`: Replication of Figure 4 of the paper.
+
+**E**. `05_figure_5.R`: Replication of Figure 5 of the paper.
+
+**F**. `06_figure_7.R`: Replication of Figure 7 of the paper.
+
+
+
