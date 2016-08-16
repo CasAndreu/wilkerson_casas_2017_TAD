@@ -19,7 +19,7 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
 
 **A**. `01_getting_models_and_clusters.py`
 
-**Only run this script if you want to generate again the main datasets used in the article.** Skip otherwise: the `data` directory in this repository already contains the datasets needed to replicate the article's Figures. However, since algorithms randomly choose starting points when estimating topic models and clusters, the topic and cluster numbers that you get may be different than the ones we use in the other scripts. To exactly replicate the figures in the paper, simply run the other scripts, which pull out all our exact same data from the data directory in this repository.
+**Only run this script if you want to generate again the main datasets used in the article.** Skip otherwise: the `data` directory in this repository already contains the datasets needed to replicate the article's Figures. However, since algorithms randomly choose starting points when estimating topic models and clusters, the topic and cluster numbers that you get may be different than the ones we use in the other scripts. To exactly replicate the figures in the paper, simply run the other scripts.
 
 This is a python script that does the following:
   - Reads and pre-processes 9,704 one-minute floor speehces from the 113th Congress.
