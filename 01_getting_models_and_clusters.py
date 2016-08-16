@@ -28,7 +28,6 @@ speeches = [d["speech"] for d in data]
 #        - Removing stopwords
 #        - Removing words shorter than 3 characters
 #        - Stemming remaining words (Porter Stemmer)
-speeches = speeches[:100]
 clean_speeches = rlda.pre_processing(speeches)
 
 # Creating an RLDA object so that we can implement all functions in the
@@ -39,8 +38,8 @@ robust_model = rlda.RLDA()
 robust_model.get_tdm(clean_speeches)
 
 # Fitting multiple LDA models to the speeches (TDM) 
-k_list = range(10,20,5) #list with #topics (k) for the models we want to fit
-n_iter = 50 #number of iteration when estimating the  models
+k_list = range(10,95,5) #list with #topics (k) for the models we want to fit
+n_iter = 350 #number of iteration when estimating the  models
 robust_model.fit_models(k_list = k_list, n_iter = n_iter)
 
 # LDA models can are often used to classify documents into topics
@@ -62,7 +61,7 @@ for m in robust_model.models_list:
     classifications.append(docs)
 
 # Exporting CSV files for each model classification
-path = "/Users/andreucasas/Desktop/wilkerson_casas_2016_TAD/"
+path = "<path_to_the_directory_where_you_have_the_repository>"
 dir_name = "data/classifications/"
 if not os.path.isdir(path + dir_name):
     os.mkdir(path + dir_name)
@@ -90,20 +89,22 @@ robust_model.get_all_ftp(features_top_n = 50)
 
 # Clustering the topics based on the cosine similarities by using Spectral
 #   clustering.
+
 # Trying several n-clusterings
-clusters_n = range(5,10,1) #list of number of clusters to try out
+clusters_n = range(5,100,1) #list of number of clusters to try out
 
 for n in clusters_n:
-    clusters = robust_model.cluster_topics(clusters_n = n,)
-    fcps = robust_model.get_fcp(clusters, features_top_n = 15)
-    with open(path + "data/clusters/cluster_c" + str(n) + ".csv", "w") as f:
+    clusters = robust_model.cluster_topics(clusters_n = n)
+    with open(path + "data/clusters/cluster" + str(n) + ".csv", "w") as f:
         writer = csv.writer(f, quoting = csv.QUOTE_ALL)
         writer.writerow(clusters)
-    with open(path + "data/clusters_top_keywords/cluster_c" + str(n) + 
-    ".csv", "w") as f:
-        writer = csv.writer(f, quoting = csv.QUOTE_ALL)
-        writer.writerow(fcps)
     
-    
+# Saving also the top keywords of the topics in each cluster
+# Only doing it for the 50-cluster clustering
 
-    
+clusters = robust_model.cluster_topics(clusters_n = 50)
+fcps = robust_model.get_fcp(clusters, features_top_n = 15)
+with open(path + "data/clusters_top_keywords/cluster" + str(n) + 
+".csv", "w") as f:
+    writer = csv.writer(f, quoting = csv.QUOTE_ALL)
+    writer.writerow(fcps)
