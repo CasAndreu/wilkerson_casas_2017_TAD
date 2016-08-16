@@ -6,20 +6,6 @@
 
 # FUNCTIONS
 
-# ... for each cluster, getting only 1 coord, where we put the cluster#
-unique_cl_coord <- function(plot_db) {
-  coord <- data.frame(cluster = NULL, x = NULL, y = NULL)
-  for (j in 1:nrow(plot_db)) {
-    obs <- plot_db[j,]
-    obs$cluster <- obs$cluster + 1
-    if (!(obs$cluster %in% coord$cluster)) {
-      coord <- rbind(coord, obs[, 1:3])
-    }
-  }
-  return(coord)
-}
-
-
 # ... a function to annotate the clusters number#
 add_cluster_num <- function(cluster) {
   annotate("text", label = cluster$cluster, x = cluster$x, y = cluster$y,
@@ -28,7 +14,7 @@ add_cluster_num <- function(cluster) {
 # ... the function that generates each individual clustering plot
 plot_clusters <- function(sim_coord, c) {
   dataset <- sim_coord
-  d <- as.numeric(read.csv(paste0('data/clusters/cluster_c', c, '.csv'), 
+  d <- as.numeric(read.csv(paste0('data/clusters/cluster', c, '.csv'), 
                            header = F)[1,])
   # Detecting which is the "melting pot" clusters: the largest one
   melting_pot <- names(which(table(d) == max(table(d))))
@@ -36,7 +22,7 @@ plot_clusters <- function(sim_coord, c) {
   dataset$mp_cluster <- 0
   dataset$mp_cluster[which(dataset$cluster == melting_pot)] <- 1
   # Specifying colors for the clusters
-  plot_colors <- rainbow(i)
+  plot_colors <- rainbow(c)
   cluster_levels <- levels(factor(dataset$cluster))
   level_index <- which(cluster_levels == melting_pot)
   plot_colors[level_index] <- "gray"
@@ -44,6 +30,8 @@ plot_clusters <- function(sim_coord, c) {
   coord <- data.frame(cluster = NULL, x = NULL, y = NULL)
   for (j in 1:nrow(dataset)) {
     obs <- dataset[j,]
+    # Adding one to the cluster number because cluster 1 is labeled as 0
+    obs$cluster <- obs$cluster + 1
     if (!(obs$cluster %in% coord$cluster)) {
       coord <- rbind(coord, obs[, 1:3])
     }

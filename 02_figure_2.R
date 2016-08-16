@@ -17,4 +17,3 @@ ggplot(cos_list, aes(x = cos_sim)) +
   ylab("") +
   scale_y_continuous(breaks = 0, labels =) +
   theme(panel.background = element_rect("white"))
-  
