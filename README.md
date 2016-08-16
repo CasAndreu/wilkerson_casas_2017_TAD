@@ -5,7 +5,9 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
 
 ## Instructions
 
-**A**. `01_getting_models_and_clusters.py`: Only run this script if you want the generate again main datasets used in the article. Skip otherwise: the `data` directory in this repository already contains the datasets needed to replicate the article's Figures. This is a python script that does the following:
+**A**. `01_getting_models_and_clusters.py`
+
+Only run this script if you want to generate again the main datasets used in the article. Skip otherwise: the `data` directory in this repository already contains the datasets needed to replicate the article's Figures. This is a python script that does the following:
   - Reads and pre-processes 9,704 one-minute floor speehces from the 113th Congress.
   - Estimates 17 [LDA](https://pypi.python.org/pypi/lda) topic models with different numbers of `k` topics (`k` = {10, 15, ..., 90}) 
   - Classifies the speeches 17 times according to the models and saves the classifications in `csv` fromat in the `data/classifications` directory.
