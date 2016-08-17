@@ -8,8 +8,8 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
 ## Instructions
 
 - Clone the repository
-- Open the `R` project `wilkerson_casas_2016_TAD` in `RStudio`
-- The `data` directory in this repository contains all the final datasets we used in the paper
+- Open the `R` project `wilkerson_casas_2016_TAD` in `RStudio`, or set up this repository as your working directory in `R`
+- The `data` directory contains all the final datasets we used in the paper
 - The text and metadata of the one-minute floor speeches can be found in the python module we developed to estimate Robust Latent Dirichlet Allocation models: [rlda](Robust Latent Dirichlet Allocation models)
 - The `01_getting_models_and_clusters.py` reproduces the construction of the final datasets
 - All the other scripts replicate the Figures in the paper
@@ -21,7 +21,7 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
 
 **Only run this script if you want to generate again the main datasets used in the article.** Skip otherwise: the `data` directory in this repository already contains the datasets needed to replicate the article's Figures. However, since algorithms randomly choose starting points when estimating topic models and clusters, the topic and cluster numbers that you get may be different than the ones we use in the other scripts. To exactly replicate the figures in the paper, simply run the other scripts.
 
-This is a python script that does the following:
+This python script that does the following:
   - Reads and pre-processes 9,704 one-minute floor speehces from the 113th Congress.
   - Estimates 17 [LDA](https://pypi.python.org/pypi/lda) topic models with different numbers of `k` topics (`k` = {10, 15, ..., 90}) 
   - Classifies the speeches 17 times according to the models and saves the classifications in `csv` fromat in the `data/classifications` directory.
