@@ -5,6 +5,7 @@
 #==============================================================================
 
 # Load packages
+library(grid)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -77,8 +78,8 @@ levels(cls_tm$issue)[2] <- "Agriculture"
 keywords <- NULL
 for (i in 1:length(clkw$keywords)) {
   kws <- clkw$keywords[i]
-  y <- strsplit(as.character(kws), split = ",")[[1]][1:5]
-  top_kws <- paste0(y[1],",",y[2],",",y[3],",",y[4],",",y[5], "]")
+  y <- strsplit(as.character(kws), split = ",")[[1]][1:4]
+  top_kws <- paste0(y[1],",",y[2],",",y[3],",",y[4],"]")
   keywords <- c(keywords, top_kws)
 }
 clkw$topkws <- keywords
@@ -89,9 +90,13 @@ clkw$topkws <- keywords
 #   2. The metatopics tags
 #   3. The keywords for each topic
 #  Run all the code below. The final command "grid.draw(gt)" builds the final
-#   figure. 
+#   figure.
+ 
+# If you want to exclude the "Melting Pot" cluster use this subset
+cls_tm_final <- filter(cls_tm, issue !=  "Melting Pot")
 
-p <- ggplot(cls_tm, aes(models, factor(cluster, levels = ))) +
+pdf("~/Desktop/clusters_issues_topics2.pdf", width = 10, height = 6)
+p <- ggplot(cls_tm_final, aes(models, factor(cluster, levels = ))) +
   geom_tile(aes(alpha = factor(topic_from_tm)), color = "white", fill = "gray", 
             size = 0.5) +
   #geom_tile(aes(fill=issue_color), alpha = 0.2) +
@@ -100,11 +105,11 @@ p <- ggplot(cls_tm, aes(models, factor(cluster, levels = ))) +
   theme(panel.background = element_rect(fill="white"),
         axis.text.x = element_text(angle=45, vjust=1, size=7, hjust=1),
         legend.position = "none",
-        plot.margin = unit(c(1,12.5,1,7), "lines")) 
+        plot.margin = unit(c(1,12,1,7), "lines")) 
 #unit(c(1,12.5,1,7)
 cls <- 0
-for (issue in unique(cls_tm$issue)) {
-  cls_new <- length(unique(cls_tm$cluster[cls_tm$issue == issue]))
+for (issue in unique(cls_tm_final$issue)) {
+  cls_new <- length(unique(cls_tm_final$cluster[cls_tm_final$issue == issue]))
   p <- p +  geom_rect(size=0.1, fill=NA, colour="gray40",
                       xmin = 0.5, xmax = 17.5, 
                       ymin= (cls + 1) - 0.5, 
@@ -113,11 +118,11 @@ for (issue in unique(cls_tm$issue)) {
 }
 
 cls <- 1
-for (i in 1:length(unique(cls_tm$issue))){
-  issue <- unique(cls_tm$issue)[i]
-  cls_new <- length(unique(cls_tm$cluster[cls_tm$issue == issue]))
+for (i in 1:length(unique(cls_tm_final$issue))){
+  issue <- unique(cls_tm_final$issue)[i]
+  cls_new <- length(unique(cls_tm_final$cluster[cls_tm_final$issue == issue]))
   p <- p + annotation_custom(
-    grob = textGrob(label = unique(cls_tm$issue)[i], just = 1, 
+    grob = textGrob(label = unique(cls_tm_final$issue)[i], just = 1, 
                     gp = gpar(cex = 0.8)),
     ymin = as.numeric((cls-0.5) + (cls_new/2)),      # Vertical position of the textGrob
     ymax = as.numeric((cls-0.5) + (cls_new/2)),
@@ -127,9 +132,9 @@ for (i in 1:length(unique(cls_tm$issue))){
 }
 
 z <- 1
-for (cl in unique(cls_tm$cluster)){
+for (cl in unique(cls_tm_final$cluster)){
   i <- as.numeric(as.character(cl))
-  j <- which(levels(cls_tm$cluster) == cl)
+  j <- which(levels(cls_tm_final$cluster) == cl)
   p <- p + annotation_custom(
     grob = textGrob(label = paste0(z,": ", clkw$topkws[i]),
                     hjust = 0, gp = gpar(cex = 0.7)),
@@ -143,3 +148,4 @@ for (cl in unique(cls_tm$cluster)){
 gt <- ggplot_gtable(ggplot_build(p)) 
 gt$layout$clip[gt$layout$name == "panel"] <- "off"
 grid.draw(gt)
+dev.off()
