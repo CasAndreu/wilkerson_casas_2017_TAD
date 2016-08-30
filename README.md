@@ -10,7 +10,7 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
 - Clone the repository
 - Open the `R` project `wilkerson_casas_2016_TAD` in `RStudio`, or set up this repository as your working directory in `R`
 - The `data` directory contains all the final datasets we used in the paper
-- The text and metadata of the one-minute floor speeches can be found in the python module we developed to estimate Robust Latent Dirichlet Allocation models: [rlda](Robust Latent Dirichlet Allocation models)
+- The text and metadata of the one-minute floor speeches can be found in the python module we developed to estimate Robust Latent Dirichlet Allocation models: [rlda](https://github.com/CasAndreu/rlda)
 - The `01_getting_models_and_clusters.py` reproduces the construction of the final datasets
 - All the other scripts replicate the Figures in the paper
 
