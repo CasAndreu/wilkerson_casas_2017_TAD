@@ -12,7 +12,10 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
 - The `data` directory contains all the final datasets we used in the paper
 - The text and metadata of the one-minute floor speeches can be found in the python module we developed to estimate Robust Latent Dirichlet Allocation models: [rlda](Robust Latent Dirichlet Allocation models)
 - The `01_getting_models_and_clusters.py` reproduces the construction of the final datasets
-- All the other scripts replicate the Figures in the paper
+- Scripts `02` to `05` replicate Figures in the paper
+- Scripts `06` and `07` create additional Figures that ended up not making it to the final verison paper
+- Figure 1 is from another paper by [Chuang et al. (2015)](http://www.aclweb.org/anthology/N15-1018): it's Figure 3 at the top of p. 188.
+- Figure 2 is simply a diagram and we do not include code to replicate it.
 
 ---
 
@@ -28,32 +31,29 @@ This python script that does the following:
   - Calculates the pairwise cosine similarity (n = 722,500) between all topics (n = 850) from the 17 models and saves the similarity scores in `csv` format: `cos_list.csv`
   - Uses [Spectral Clustering](http://scikit-learn.org/stable/modules/clustering.html#spectral-clustering) and the cosine similarity scores to cluster topics into `c` number of clusters (`c` = {5, 10, ..., 95}). Saves the resulting clusters in the `data/clusters` directory.
   The script uses a `python` module initially written for this paper: [rlda](https://github.com/CasAndreu/rlda) (Robust Latent Dirichlet Allocation)
-
+  
 **B**. [`02_figure_2.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/02_figure_2.R): Replication of Figure 2 of the paper.
-<p align="center">
-  <img src="images/intra_density_final.png" style="width: 200px;"/>
-</p>
-
-
-**C**. [`03_figure_3.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/03_figure_3.R): Replication of Figure 3 of the paper.
-<p align="center">
-  <img src="images/three_clustering.png" style="width: 200px;"/>
-</p>
-
-**D**. [`04_figure_4.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/04_figure_4.R): Replication of Figure 4 of the paper.
 <p align="center">
   <img src="images/intra_including_excluding.png" style="width: 200px;"/>
 </p>
 
-**E**. [`05_figure_5.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/05_figure_5.R): Replication of Figure 5 of the paper.
+**C**. [`03_figure_4.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/03_figure_4.R): Replication of Figure 4 of the paper.
 <p align="center">
   <img src="images/clusters_issues_topics2.png" style="width: 200px;"/>
 </p>
 
-**F**. [`06_figure_7.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/06_figure_7.R): Replication of Figure 7 of the paper.
+**D**. [`04_figure_5.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/04_figure_5.R): Replication of Figure 5 of the paper.
 <p align="center">
-  <img src="images/issues_results3.png" style="width: 200px;"/>
+  <img src="imagesissues_results2.png" style="width: 200px;"/>
 </p>
 
 
+**E**. [`05_extra_figure_1.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/05_extra_figure_1.R): Figure showing the density of all cosine similarities.
+<p align="center">
+  <img src="images/intra_density_final.png" style="width: 200px;"/>
+</p>
 
+**F**. [`06_extra_figure_2.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/06_extra_figure_2.R): Figure showing three Spectral Clusterings of the topics, with different number of clusters (`c` = {10, 17, 50})
+<p align="center">
+  <img src="images/three_clustering.png" style="width: 200px;"/>
+</p>

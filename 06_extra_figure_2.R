@@ -1,6 +1,7 @@
 #==============================================================================
-# 03_figure_3.R
-# Purpose: reproduce Figure 3 of the paper.
+# 06_extra_figure_2.R
+# Purpose: extra Figure showing three Spectral Clusterings of the topics, with 
+#     different number of clusters (c = {10, 17, 50})
 # Author: Andreu Casas
 #==============================================================================
 
@@ -30,7 +31,7 @@ sim_coord <- data.frame(x = x, y = y)
 cls <- c(10, 17, 50)
 
 # Loading functions written for this specific plots
-source("./03_figure_3_functions.R")
+source("./06_extra_figure_2_functions.R")
 
 # Creating a plot for each clusterings with differen number of clusters
 c10_plot <- plot_clusters(sim_coord, 10)

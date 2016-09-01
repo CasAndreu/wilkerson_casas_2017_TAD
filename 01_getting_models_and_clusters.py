@@ -1,10 +1,10 @@
-#==============================================================================
-# 01_getting_models_and_clusters.py
-# Purpose: fitting multiple LDA models to one-minute floor speeches and then
-#   clustering the resulting topics.
-# Details: implements a Python module (rlda) written for this purpose.
-# Author: Andreu Casas
-#==============================================================================
+'''
+01_getting_models_and_clusters.py
+Purpose: fitting multiple LDA models to one-minute floor speeches and then
+   clustering the resulting topics.
+Details: implements a Python module (rlda) written for this purpose.
+Author: Andreu Casas
+'''
 
 # Loading modules
 import rlda

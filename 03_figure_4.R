@@ -1,6 +1,6 @@
 #==============================================================================
-# 05_figure_5.R
-# Purpose: reproduce Figure 5 of the paper. Metatopics of a 50 cluster model.
+# 03_figure_4.R
+# Purpose: reproduce Figure 4 of the paper. Metatopics of a 50 cluster model.
 # Author: Andreu Casas
 #==============================================================================
 
@@ -93,7 +93,8 @@ clkw$topkws <- keywords
 #   figure.
  
 # If you want to exclude the "Melting Pot" cluster use this subset
-cls_tm_final <- filter(cls_tm, issue !=  "Melting Pot")
+cls_tm_final <- filter(cls_tm, issue !=  "Melting Pot",
+                       issue != "Unclear")
 
 pdf("~/Desktop/clusters_issues_topics2.pdf", width = 10, height = 6)
 p <- ggplot(cls_tm_final, aes(models, factor(cluster, levels = ))) +

@@ -1,6 +1,7 @@
 #==============================================================================
-# 03_figure_3_functions.R
-# Purpose: functions used in the replication of Figure 3. 
+# 06_extra_figure_2_functions.R
+# Purpose: Functions for the extra Figure showing three Spectral Clusterings of
+#     the topics, with different number of clusters (c = {10, 17, 50}). 
 # Author: Andreu Casas
 #==============================================================================
 

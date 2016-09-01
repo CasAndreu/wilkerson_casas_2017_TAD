@@ -1,6 +1,6 @@
 #==============================================================================
-# 06_figure_7.R
-# Purpose: reproduce Figure 7 of the paper. Topic Clustering v. Single Topic.
+# 04_figure_5.R
+# Purpose: reproduce Figure 5 of the paper. Results for 21 robust Metatopics.
 # Author: Andreu Casas
 #==============================================================================
 
