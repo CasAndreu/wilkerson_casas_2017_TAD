@@ -16,7 +16,7 @@ Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis 
 - Scripts `06` and `07` create additional Figures that ended up not making it to the final verison paper
 - Figure 1 is from another paper by [Chuang et al. (2015)](http://www.aclweb.org/anthology/N15-1018): it's Figure 3 at the top of p. 188.
 - Figure 2 is simply a diagram and we do not include code to replicate it.
-
+- The `online_appendix.pdf` conatins a list of top terms for the 50 clusters and extra information about the validation of the agriculture metatopic.
 ---
 
 
@@ -44,7 +44,7 @@ This python script that does the following:
 
 **D**. [`04_figure_5.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/04_figure_5.R): Replication of Figure 5 of the paper.
 <p align="center">
-  <img src="imagesissues_results2.png" style="width: 200px;"/>
+  <img src="images/issues_results2.png" style="width: 200px;"/>
 </p>
 
 
