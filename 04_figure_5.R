@@ -1,12 +1,15 @@
 #==============================================================================
 # 04_figure_5.R
-# Purpose: reproduce Figure 5 of the paper. Results for 21 robust Metatopics.
+# Purpose: reproduce Figure 5 of the paper. Results for 21 robust Metatopics and
+#          how they compare to the results for a single 50-topic model.
 # Author: Andreu Casas
 #==============================================================================
 
 # Load packages
 library(ggplot2)
 library(dplyr)
+library(tidyr)
+library(grid)
 
 # Load data with similarity score between all topics
 cos_list <- read.csv("./data/cos_list.csv")
@@ -26,7 +29,7 @@ issues_db <- NULL
 
 # Fill out the metatopic database.
 for (issue in unique(clkw$issue)) {
-  # select an issue
+  # select an issue/metatopic
   if (issue != "Melting Pot") {
     # which clusters are about that issue/metatopic
     issue_clusters <- clkw$cluster[clkw$issue == issue]
@@ -37,7 +40,7 @@ for (issue in unique(clkw$issue)) {
     # the topic number withing those models
     t_vector <- as.numeric(sapply(topics, function(x) strsplit(x, "-")[[1]])[2,])
     # initializing a database that will contain info about the percentage of 
-    #   documents classified in a topic from that metatopic according to each
+    #   documents classified into a topic from that metatopic according to each
     #   topic-model
     partial_db <- as.data.frame(matrix(ncol = 5, nrow = 17))
     colnames(partial_db) <- c("dem", "rep", "dif", "tm", "issue")
@@ -67,9 +70,6 @@ for (issue in unique(clkw$issue)) {
   }
   print(paste0("Done with issue: ", issue))
 }
-
-
-library(dplyr)
 
 # Reshape and process the metatopics/issue database so that it's easier 
 #   to plot the data
@@ -105,17 +105,16 @@ issues_db50_nounclear <- issues_db50 %>%
 issues_db50_nounclear$origin <- "tm50"
 issues_db_nounclear$origin <- "cl50"
 
+# For the 50-topic model, we don't want to plot the 2 topics that are not in
+#   the robust 50-cluster model (History and Labor). Removing them from the
+#   dataset.
+issues_db50_nounclear <- issues_db50_nounclear %>%
+  filter(issue != "History", issue != "Labor") %>%
+  mutate(issue = as.character(issue))
+
 # Merging the two datasets now
 all_issues <- full_join(issues_db_nounclear, issues_db50_nounclear)
 all_issues <- arrange(all_issues, issue)
-
-# Relevel the "issue" variable so the issues that are only in the 50-topic
-#   model are at the top
-all_issues$issue <- as.factor(all_issues$issue)
-lvls_all_issues <- levels(all_issues$issue)
-lvls_all_issues <- lvls_all_issues[-which(lvls_all_issues %in% c("Labor", "History"))]
-lvls_all_issues <- c(lvls_all_issues, "Labor", "History")
-all_issues$issue <- factor(all_issues$issue, levels = lvls_all_issues)
 
 # Standardize differences
 all_issues$sum <- all_issues$rep + all_issues$dem
@@ -123,19 +122,13 @@ all_issues$dem_st <- all_issues$dem / all_issues$sum
 all_issues$rep_st <- all_issues$rep / all_issues$sum
 all_issues$dif_st <- all_issues$rep_st - all_issues$dem_st
 
-# Reshape so it's easier/faster to plot with ggplot
-issues_att <- all_issues %>%
-  select(dem_st, rep_st, issue) %>%
-  gather(party, att, -issue) %>%
-  group_by(party, issue) %>%
-  summarize(att = round((mean(att, na.rm = TRUE) * 100),1)) %>%
-  spread(party, att)
-
-# Multiply the percentage by 100 so that they range from 0 to 100 instead of 0-1
-issues_att3 <- issues_db50_nounclear %>%
-  arrange(issue) %>%
-  mutate(dem = round((dem * 100), 2), rep = round((rep*100), 2))
-
+# A database with the mean attention to the metatopics across models. Results
+#   for the "robust" model.
+issues_att <- issues_db_nounclear %>%
+  group_by(issue) %>%
+  summarize(dem = round(mean(dem, na.rm = TRUE) * 100, 1),
+            rep = round(mean(rep, na.rm = TRUE) * 100, 1))
+  
 # FIGURE 7. We create the Figure in 2 steps:
 #   a. The plot ("p")
 #   b. We add two columns on the right side indicating Dems' and Reps' %
@@ -143,7 +136,7 @@ issues_att3 <- issues_db50_nounclear %>%
 
 p <- ggplot(all_issues, aes(y = factor(issue), x = dif_st)) +
   geom_point(aes(size = origin, pch = origin, alpha = origin)) +
-  scale_shape_manual(values = c(16,4)) +
+  scale_shape_manual(values = c(16,1)) +
   scale_size_manual(values = c(2,4)) +
   scale_alpha_manual(values = c(0.3,1)) +
   geom_vline(xintercept = 0) +
@@ -157,10 +150,10 @@ p <- ggplot(all_issues, aes(y = factor(issue), x = dif_st)) +
         plot.margin = unit(c(1,6,1,1), "lines"),
         legend.position = "none")
 
-for (i in 1:nrow(issues_att3)){
+for (i in 1:nrow(issues_att)){
   if (i != 6) {
-    d <- format(issues_att3$dem[i], nsmall = 2)
-    r <- format(issues_att3$rep[i], nsmall = 2)
+    d <- format(issues_att$dem[i], nsmall = 1)
+    r <- format(issues_att$rep[i], nsmall = 1)
   }
   p <- p + annotation_custom(
     grob = textGrob(label = paste0((paste0(d, "%")),
@@ -170,7 +163,7 @@ for (i in 1:nrow(issues_att3)){
     ymax = i,
     xmin = 1.15,         # Note: The grobs are positioned outside the plot area
     xmax = 1.15)
-  if (i == nrow(issues_att3)) {
+  if (i == nrow(issues_att)) {
     p <- p + annotation_custom(
       grob = textGrob(label = "     D         R", gp = gpar(cex = 0.9), hjust = 0.5),
       ymin = i + 1,      # Vertical position of the textGrob
