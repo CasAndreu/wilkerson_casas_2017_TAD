@@ -1,4 +1,4 @@
-# Wilkerson & Casas (2016) Text-As-Data *ARPS*
+# Wilkerson & Casas (2016) Text As Data *ARPS*
 Replication material for the paper by John Wilkerson and Andreu Casas on Text as Data at the Annual Review of Political Science:
 
 Wilkerson, John and Andreu Casas. 2016. "Large-scale Computerized Text Analysis in Political Science: Opportunities and Challenges." *Annual Review of Political Science*, VV:p-p. (*forthcoming*)
@@ -58,3 +58,5 @@ This python script that does the following:
 <p align="center">
   <img src="images/three_clustering.png" style="width: 200px;"/>
 </p>
+
+**G**. [`07_01_validation.R`](https://github.com/CasAndreu/wilkerson_casas_2016_TAD/blob/master/07_01_validation.R): Code used for the validation of the metatopic Agriculture in the Online Appendix. In the data directory there is also a dataset (`agr_memb.csv`) with district-member-level data about the percentage of district population working on the agricultural sector and percentage of representatives' speeches on Agriculture. 
